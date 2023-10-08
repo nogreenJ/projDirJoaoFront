@@ -4,55 +4,55 @@ import '@popperjs/core/dist/cjs/popper.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import Home from "./componentes/telas/Home";
-import Categoria from "./componentes/telas/categoria/Categoria";
-import Produto from "./componentes/telas/produto/Produto";
+import Diretorio from "./componentes/telas/diretorios/Diretorio";
+import Usuario from "./componentes/telas/usuarios/Usuario";
 import Login from "./componentes/telas/login/Login";
 import MenuPublico from "./componentes/telas/MenuPublico";
 import MenuPrivado from "./componentes/telas/MenuPrivado";
 
 const router = createBrowserRouter([
   {
-    path : "/",
-    element : <MenuPublico/>,
-    children : [
+    path: "/",
+    element: <MenuPublico />,
+    children: [
       {
-        index : true,
-        element : <Home/>
+        index: true,
+        element: <Home />
       },
       {
-        path : "login",
-        element : <Login/>
-      }   
+        path: "login",
+        element: <Login />
+      }
     ]
   },
   {
-    path : "/privado",
-    element : <MenuPrivado/>,
-    children : [
+    path: "/privado",
+    element: <MenuPrivado />,
+    children: [
       {
-        index : true,
-        element : <Home/>
+        index: true,
+        element: <Home />
       },
       {
-        path : "categorias",
-        element :  <Categoria/>
+        path: "diretorios",
+        element: <Diretorio />
       }
       ,
       {
-        path : "produtos",
-        element :  <Produto/>
+        path: "usuarios",
+        element: <Usuario />
       },
       {
-        path : "login",
-        element : <Login/>
-      }   
+        path: "login",
+        element: <Login />
+      }
     ]
   }
 ])
 
 function App() {
   return (
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   );
 }
 
