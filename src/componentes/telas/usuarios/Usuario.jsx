@@ -23,7 +23,7 @@ function Usuario() {
     const [carregando, setCarregando] = useState(false);
 
     const novoObjeto = () => {
-        if (getUsuario().tipo != 1) {
+        if (getUsuario().tipo !== 1) {
             setAlerta({ status: "warning", message: "Apenas usuários administradores podem adicionar novos usuários" });
         }
         setEditar(false);

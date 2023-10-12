@@ -1,5 +1,4 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { Sidebar } from 'flowbite-react';
 import { getUsuario, logout } from '../../seguranca/Autenticacao';
 
 
