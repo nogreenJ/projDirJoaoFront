@@ -43,6 +43,7 @@ function Diretorio() {
         e.preventDefault();
         const metodo = editar ? "PUT" : "POST";
         try {
+            console.log(editar)
             console.log(objeto)
             let retornoAPI = await cadastraDiretorioServico(objeto, metodo);
             setAlerta({
