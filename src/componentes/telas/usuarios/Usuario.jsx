@@ -10,6 +10,7 @@ import Form from "./Form";
 import Carregando from "../../comuns/Carregando";
 import WithAuth from "../../../seguranca/WithAuth";
 import { useNavigate } from "react-router-dom";
+import { getUsuario } from "../../../seguranca/Autenticacao";
 
 function Usuario() {
 
@@ -18,13 +19,16 @@ function Usuario() {
     const [alerta, setAlerta] = useState({ status: "", message: "" });
     const [listaObjetos, setListaObjetos] = useState([]);
     const [editar, setEditar] = useState(false);
-    const [objeto, setObjeto] = useState({ codigo: "", nome: "" });
+    const [objeto, setObjeto] = useState({ codigo: "", nome: "", email: "", tipo: "", senha: "" });
     const [carregando, setCarregando] = useState(false);
 
     const novoObjeto = () => {
+        if (getUsuario().tipo != 1) {
+            setAlerta({ status: "warning", message: "Apenas usuários administradores podem adicionar novos usuários" });
+        }
         setEditar(false);
         setAlerta({ status: "", message: "" });
-        setObjeto({ codigo: 0, nome: "" });
+        setObjeto({ codigo: 0, nome: "", email: "", tipo: 0, senha: "" });
     }
 
     const editarObjeto = async codigo => {
@@ -34,7 +38,7 @@ function Usuario() {
             setObjeto(await getUsuarioServicoPorCodigoAPI(codigo));
         } catch (err) {
             window.location.reload();
-            navigate("/login", { replace: true });
+            navigate("/", { replace: true });
         }
     }
 
@@ -53,7 +57,7 @@ function Usuario() {
             }
         } catch (err) {
             window.location.reload();
-            navigate("/login", { replace: true });
+            navigate("/", { replace: true });
         }
         recuperaUsuarios();
     }
@@ -65,7 +69,7 @@ function Usuario() {
             setCarregando(false);
         } catch (err) {
             window.location.reload();
-            navigate("/login", { replace: true });
+            navigate("/", { replace: true });
         }
     }
 
@@ -81,7 +85,7 @@ function Usuario() {
             }
         } catch (err) {
             window.location.reload();
-            navigate("/login", { replace: true });
+            navigate("/", { replace: true });
         }
     }
 

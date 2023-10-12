@@ -4,8 +4,11 @@ import { gravaAutenticacao, getToken } from "../../../seguranca/Autenticacao";
 import Carregando from "../../comuns/Carregando";
 import Alerta from "../../comuns/Alerta";
 import './signin.css';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
@@ -23,6 +26,7 @@ function Login() {
             setCarregando(true);
             await fetch(`${process.env.REACT_APP_ENDERECO_API}/login`, {
                 method: "POST",
+                mode: 'cors',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             }).then(response => response.json())
@@ -32,6 +36,7 @@ function Login() {
                     } else {
                         setAutenticado(true);
                         gravaAutenticacao(json);
+                        navigate('/', { replace: true });
                     }
                 })
         } catch (err) {

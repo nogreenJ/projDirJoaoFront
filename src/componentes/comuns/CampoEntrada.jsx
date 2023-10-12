@@ -1,5 +1,5 @@
-function CampoEntrada({id , label, tipo , name, value, handlechange,
-    requerido, readonly, textovalido, textoinvalido, maximocaracteres}) {
+function CampoEntrada({ id, label, tipo, name, value, handlechange,
+    requerido, readonly, textovalido, textoinvalido, maximocaracteres }) {
 
     return (
         <div className="form-group">
@@ -9,6 +9,7 @@ function CampoEntrada({id , label, tipo , name, value, handlechange,
             <input
                 type={tipo}
                 className="form-control"
+                autoComplete="new-password"
                 id={id}
                 name={name}
                 value={value}

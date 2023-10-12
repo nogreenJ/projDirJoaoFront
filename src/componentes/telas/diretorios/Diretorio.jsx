@@ -10,6 +10,7 @@ import Form from "./Form";
 import Carregando from "../../comuns/Carregando";
 import WithAuth from "../../../seguranca/WithAuth";
 import { useNavigate } from "react-router-dom";
+import { getUsuario } from "../../../seguranca/Autenticacao";
 
 function Diretorio() {
 
@@ -18,13 +19,13 @@ function Diretorio() {
     const [alerta, setAlerta] = useState({ status: "", message: "" });
     const [listaObjetos, setListaObjetos] = useState([]);
     const [editar, setEditar] = useState(false);
-    const [objeto, setObjeto] = useState({ codigo: "", nome: "" });
+    const [objeto, setObjeto] = useState({ codigo: "", nome: "", parent: "", usuario: "" });
     const [carregando, setCarregando] = useState(false);
 
     const novoObjeto = () => {
         setEditar(false);
         setAlerta({ status: "", message: "" });
-        setObjeto({ codigo: 0, nome: "" });
+        setObjeto({ codigo: 0, nome: "", parent: null, usuario: getUsuario().codigo });
     }
 
     const editarObjeto = async codigo => {
@@ -34,7 +35,7 @@ function Diretorio() {
             setObjeto(await getDiretorioServicoPorCodigoAPI(codigo));
         } catch (err) {
             window.location.reload();
-            navigate("/login", { replace: true });
+            navigate("/", { replace: true });
         }
     }
 
@@ -53,7 +54,7 @@ function Diretorio() {
             }
         } catch (err) {
             window.location.reload();
-            navigate("/login", { replace: true });
+            navigate("/", { replace: true });
         }
         recuperaDiretorios();
     }
@@ -65,7 +66,7 @@ function Diretorio() {
             setCarregando(false);
         } catch (err) {
             window.location.reload();
-            navigate("/login", { replace: true });
+            navigate("/", { replace: true });
         }
     }
 
@@ -81,7 +82,7 @@ function Diretorio() {
             }
         } catch (err) {
             window.location.reload();
-            navigate("/login", { replace: true });
+            navigate("/", { replace: true });
         }
     }
 

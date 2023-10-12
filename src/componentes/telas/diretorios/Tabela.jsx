@@ -15,7 +15,7 @@ function Tabela() {
                 onClick={() => novoObjeto()}>
                 Novo <i className="bi bi-file-earmark-plus"></i>
             </button>
-            {listaObjetos.length === 0 && <h1>Nenhuma diretorio encontrada</h1>}
+            {listaObjetos.length === 0 && <h1>Nenhum diretório encontrado</h1>}
             {listaObjetos.length > 0 && (
                 <table className="table">
                     <thead>

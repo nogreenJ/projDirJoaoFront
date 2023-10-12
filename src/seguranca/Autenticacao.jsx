@@ -17,6 +17,7 @@ export const getToken = () => {
             console.log('Token expirado');
             logout();
             alert('Token Expirado');
+            return null;
         } else {
             return autenticacao.token;
         }
@@ -51,4 +52,5 @@ export const gravaAutenticacao = (json) => {
 export const logout = (json) => {
     localStorage.setItem(NOMEAPP + '/autenticacao',
         JSON.stringify({ auth: false, token: "" }));
+    //this.nextPath('/')
 }

@@ -6,7 +6,7 @@ const MenuPublico = () => {
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
-                    <NavLink className="navbar-brand" aria-current="page" exact="true" to="/">eShop</NavLink>
+                    <NavLink className="navbar-brand" aria-current="page" exact="true" to="/">APP Diretórios</NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -17,7 +17,7 @@ const MenuPublico = () => {
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link active" aria-current="page" exact="true" to="/login">Login</NavLink>
-                            </li>                       
+                            </li>
                         </ul>
                     </div>
                 </div>
