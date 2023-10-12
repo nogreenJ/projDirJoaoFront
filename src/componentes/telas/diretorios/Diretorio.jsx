@@ -25,7 +25,7 @@ function Diretorio() {
     const novoObjeto = () => {
         setEditar(false);
         setAlerta({ status: "", message: "" });
-        setObjeto({ codigo: 0, nome: "", parent: null, usuario: getUsuario().codigo });
+        setObjeto({ codigo: 0, nome: "", parent: "", usuario: getUsuario().codigo });
     }
 
     const editarObjeto = async codigo => {
