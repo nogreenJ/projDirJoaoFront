@@ -8,7 +8,7 @@ const Alerta = ({ alerta }) => {
         setExibir(true);
         setTimeout(() => {
             setExibir(false);
-        }, 2000);
+        }, 10000);
     }, [alerta]);
 
     let classe = '';

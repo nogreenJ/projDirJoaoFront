@@ -22,9 +22,20 @@ function Usuario() {
     const [objeto, setObjeto] = useState({ codigo: "", nome: "", email: "", tipo: "", senha: "" });
     const [carregando, setCarregando] = useState(false);
 
+    const isAdm = () => {
+        const tipo = getUsuario().tipo;
+        return tipo === 1 || tipo === "1";
+    }
+
+    const isOwnUser = (cod) => {
+        const codigo = getUsuario().codigo;
+        return codigo === cod;
+    }
+
     const novoObjeto = () => {
         if (getUsuario().tipo !== 1) {
             setAlerta({ status: "warning", message: "Apenas usuários administradores podem adicionar novos usuários" });
+            return;
         }
         setEditar(false);
         setAlerta({ status: "", message: "" });
@@ -102,7 +113,7 @@ function Usuario() {
     return (
         <UsuarioContext.Provider value={{
             alerta, setAlerta, listaObjetos, remover,
-            objeto, editar, acaoCadastrar,
+            objeto, editar, acaoCadastrar, isAdm, isOwnUser,
             handleChange, novoObjeto, editarObjeto
         }}>
             <Carregando carregando={carregando}>

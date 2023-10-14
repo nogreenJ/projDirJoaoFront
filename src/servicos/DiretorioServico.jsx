@@ -5,7 +5,7 @@ export const getDiretorioServico = async () => {
     const user = getUsuario().codigo;
 
     const response =
-        await fetch(`${process.env.REACT_APP_ENDERECO_API}/diretorio/${user}`,
+        await fetch(`${process.env.REACT_APP_ENDERECO_API}/diretorio`,
             {
                 method: "GET",
                 headers: {

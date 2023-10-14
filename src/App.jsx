@@ -6,16 +6,17 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import Diretorio from "./componentes/telas/diretorios/Diretorio";
 import Usuario from "./componentes/telas/usuarios/Usuario";
 import Menu from "./componentes/telas/Menu";
+import Home from "./componentes/telas/Home"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Menu />,
     children: [
-      /*{
+      {
         index: true,
         element: <Home />
-      },*/
+      },
       {
         path: "diretoriomenu",
         element: <Diretorio />

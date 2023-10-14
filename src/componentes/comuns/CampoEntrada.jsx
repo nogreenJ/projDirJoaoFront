@@ -16,6 +16,7 @@ function CampoEntrada({ id, label, tipo, name, value, handlechange,
                 onChange={handlechange}
                 required={requerido}
                 readOnly={readonly}
+                style={{ backgroundColor: readonly ? "lightgrey" : "white" }}
                 maxLength={maximocaracteres}
             />
             <div className="valid-feedback">

@@ -3,10 +3,11 @@ import Alerta from '../../comuns/Alerta';
 import DiretorioContext from './DiretorioContext';
 import CampoEntrada from '../../comuns/CampoEntrada';
 import Dialogo from '../../comuns/Dialogo';
+import CampoSelect from '../../comuns/CampoSelect';
 
 function Form() {
 
-    const { objeto, handleChange, acaoCadastrar, alerta } = useContext(DiretorioContext);
+    const { objeto, handleChange, acaoCadastrar, alerta, getListaObjetosSemSelf } = useContext(DiretorioContext);
 
     return (
         <Dialogo id="modalEdicao" titulo="Diretorio" idformulario="formEdicao"
@@ -23,11 +24,23 @@ function Form() {
                 requerido={true} readonly={false}
                 textovalido="Nome OK" textoinvalido="Informe o nome"
                 maximocaracteres={40} />
-            <CampoEntrada id="txtParent" label="Parent" tipo="number"
-                name="parent" value={objeto ? objeto.parent : ''}
+            <CampoSelect id="txtParent" label="Dir. Pai"
+                name="parent" value={objeto ? objeto.parent : ""}
                 handlechange={handleChange}
-                requerido={false} readonly={false}
-                maximocaracteres={5} />
+                requerido={false}
+                textovalido="Dir. Pai OK">
+                <option key="" value="">
+                    Sem Dir. Pai
+                </option>
+                {
+
+                    getListaObjetosSemSelf().map((cat) => (
+                        <option key={cat.codigo} value={cat.codigo}>
+                            {cat.nome}
+                        </option>
+                    ))
+                }
+            </CampoSelect>
         </Dialogo>
     )
 }

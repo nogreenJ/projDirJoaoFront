@@ -29,7 +29,9 @@ const MenuPrivado = () => {
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
                                         <NavLink className="dropdown-item"
-                                            onClick={() => logout()}
+                                            onClick={() => {
+                                                logout();
+                                            }}
                                             exact="true" to="/">Logout</NavLink>
                                     </li>
                                 </ul>

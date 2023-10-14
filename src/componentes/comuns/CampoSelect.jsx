@@ -13,7 +13,6 @@ function CampoSelect(props) {
                 onChange={props.handlechange}
                 required={props.requerido}
             >
-                <option disable="true" value="">{props.textoinvalido}</option>
                 {props.children}
             </select>
             <div className="valid-feedback">

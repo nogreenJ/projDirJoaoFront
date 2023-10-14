@@ -4,11 +4,11 @@ import { gravaAutenticacao, getToken } from "../../../seguranca/Autenticacao";
 import Carregando from "../../comuns/Carregando";
 import Alerta from "../../comuns/Alerta";
 import './signin.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
-    const navigate = useNavigate();
+    let navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
@@ -36,11 +36,10 @@ function Login() {
                     } else {
                         setAutenticado(true);
                         gravaAutenticacao(json);
-                        navigate('/', { replace: true });
+                        navigate("/", { replace: true });
                     }
                 })
         } catch (err) {
-            console.log(err);
             setAlerta({ status: "error", message: err.message });
         } finally {
             setCarregando(false);
@@ -59,7 +58,7 @@ function Login() {
     })
 
     if (autenticado === true) {
-        return <Navigate to="/privado" />
+        return <Navigate to="/" />
     }
 
     return (

@@ -20,14 +20,16 @@ function Tabela() {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th scope="col" style={{ textAlign: 'center' }}>Ações</th>
                             <th scope="col">Código</th>
                             <th scope="col">Nome</th>
+                            <th scope="col" style={{ textAlign: 'center' }}>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         {listaObjetos.map(objeto => (
                             <tr key={objeto.codigo}>
+                                <td>{objeto.codigo}</td>
+                                <td>{objeto.nome}</td>
                                 <td align="center">
                                     <button className="btn btn-info"
                                         onClick={() => editarObjeto(objeto.codigo)}
@@ -39,8 +41,6 @@ function Tabela() {
                                         <i className="bi bi-trash"></i>
                                     </button>
                                 </td>
-                                <td>{objeto.codigo}</td>
-                                <td>{objeto.nome}</td>
                             </tr>
                         ))}
                     </tbody>

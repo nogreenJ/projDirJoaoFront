@@ -6,7 +6,7 @@ import Dialogo from '../../comuns/Dialogo';
 
 function Form() {
 
-    const { objeto, handleChange, acaoCadastrar, alerta } = useContext(UsuarioContext);
+    const { editar, objeto, handleChange, acaoCadastrar, alerta } = useContext(UsuarioContext);
 
     return (
         <Dialogo id="modalEdicao" titulo="Usuario" idformulario="formEdicao"
@@ -17,17 +17,17 @@ function Form() {
                 handlechange={handleChange}
                 requerido={false} readonly={true}
                 maximocaracteres={5} />
+            <CampoEntrada id="txtEmail" label="Email" tipo="text"
+                name="email" value={objeto ? objeto.email : ''}
+                handlechange={handleChange}
+                requerido={true} readonly={editar}
+                textovalido="Email OK" textoinvalido="Informe o Email"
+                maximocaracteres={40} />
             <CampoEntrada id="txtNome" label="Nome" tipo="text"
                 name="nome" value={objeto ? objeto.nome : ''}
                 handlechange={handleChange}
                 requerido={true} readonly={false}
                 textovalido="Nome OK" textoinvalido="Informe o nome"
-                maximocaracteres={40} />
-            <CampoEntrada id="txtEmail" label="Email" tipo="text"
-                name="email" value={objeto ? objeto.email : ''}
-                handlechange={handleChange}
-                requerido={true} readonly={false}
-                textovalido="Email OK" textoinvalido="Informe o Email"
                 maximocaracteres={40} />
             <CampoEntrada id="txtSenha" label="Senha" tipo="password"
                 name="senha" value={objeto ? objeto.senha : ''}

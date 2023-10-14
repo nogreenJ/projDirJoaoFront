@@ -25,7 +25,14 @@ function Diretorio() {
     const novoObjeto = () => {
         setEditar(false);
         setAlerta({ status: "", message: "" });
-        setObjeto({ codigo: 0, nome: "", parent: null, usuario: getUsuario().codigo });
+        setObjeto({ codigo: 0, nome: "", parent: "", usuario: getUsuario().codigo });
+    }
+
+    const getListaObjetosSemSelf = () => {
+        const newArr = listaObjetos.filter(obj => {
+            return obj.codigo !== objeto.codigo;
+        });
+        return newArr
     }
 
     const editarObjeto = async codigo => {
@@ -99,7 +106,7 @@ function Diretorio() {
     return (
         <DiretorioContext.Provider value={{
             alerta, setAlerta, listaObjetos, remover,
-            objeto, editar, acaoCadastrar,
+            objeto, editar, acaoCadastrar, getListaObjetosSemSelf,
             handleChange, novoObjeto, editarObjeto
         }}>
             <Carregando carregando={carregando}>

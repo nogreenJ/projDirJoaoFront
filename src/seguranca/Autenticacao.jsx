@@ -14,7 +14,6 @@ export const getToken = () => {
     } else {
         var decoded = jwt_decode(autenticacao.token);
         if (decoded.exp <= Math.floor(new Date() / 1000)) {
-            console.log('Token expirado');
             logout();
             alert('Token Expirado');
             return null;
@@ -36,7 +35,6 @@ export const getUsuario = () => {
     } else {
         var decoded = jwt_decode(autenticacao.token);
         if (decoded.exp <= Math.floor(new Date() / 1000)) {
-            console.log('Token expirado');
             logout();
             alert('Token Expirado');
         } else {
@@ -50,7 +48,6 @@ export const gravaAutenticacao = (json) => {
 }
 
 export const logout = (json) => {
-    localStorage.setItem(NOMEAPP + '/autenticacao',
-        JSON.stringify({ auth: false, token: "" }));
-    //this.nextPath('/')
+    localStorage.setItem(NOMEAPP + '/autenticacao', JSON.stringify({ auth: false, token: "" }));
+    window.location.reload();
 }
