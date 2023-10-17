@@ -35,6 +35,19 @@ function Diretorio() {
         return newArr
     }
 
+    const getDiretorioList = (id) => {
+        let dirList = [];
+        if (id) {
+            dirList = listaObjetos.filter(obj => obj.parent === id);
+        } else {
+            dirList = listaObjetos.filter(obj => !obj.codigo);
+        }
+        dirList.forEach(obj => {
+            obj.children = getDiretorioList(obj.codigo);
+        });
+        return dirList;
+    }
+
     const editarObjeto = async codigo => {
         try {
             setEditar(true);
@@ -109,7 +122,7 @@ function Diretorio() {
         <DiretorioContext.Provider value={{
             alerta, setAlerta, listaObjetos, remover,
             objeto, editar, acaoCadastrar, getListaObjetosSemSelf,
-            handleChange, novoObjeto, editarObjeto
+            getDiretorioList, handleChange, novoObjeto, editarObjeto
         }}>
             <Carregando carregando={carregando}>
                 <Tabela />
