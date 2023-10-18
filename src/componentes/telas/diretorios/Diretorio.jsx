@@ -11,6 +11,12 @@ import Carregando from "../../comuns/Carregando";
 import WithAuth from "../../../seguranca/WithAuth";
 import { useNavigate } from "react-router-dom";
 import { getUsuario } from "../../../seguranca/Autenticacao";
+import { TreeItem } from '@mui/x-tree-view/TreeItem';
+import FolderIcon from '@mui/icons-material/Folder';
+import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+
 
 function Diretorio() {
 
@@ -22,10 +28,10 @@ function Diretorio() {
     const [objeto, setObjeto] = useState({ codigo: "", nome: "", parent: "", usuario: "" });
     const [carregando, setCarregando] = useState(false);
 
-    const novoObjeto = () => {
+    const novoObjeto = (parentId) => {
         setEditar(false);
         setAlerta({ status: "", message: "" });
-        setObjeto({ codigo: 0, nome: "", parent: "", usuario: getUsuario().codigo });
+        setObjeto({ codigo: 0, nome: "", parent: (parentId ? parentId : ""), usuario: getUsuario().codigo });
     }
 
     const getListaObjetosSemSelf = () => {
@@ -35,18 +41,65 @@ function Diretorio() {
         return newArr
     }
 
-    const getDiretorioList = (id) => {
-        let dirList = [];
-        if (id) {
-            dirList = listaObjetos.filter(obj => obj.parent === id);
-        } else {
-            dirList = listaObjetos.filter(obj => !obj.codigo);
-        }
-        dirList.forEach(obj => {
-            obj.children = getDiretorioList(obj.codigo);
-        });
-        return dirList;
-    }
+    const getTreeItemsFromData = (prentId) => {
+        let list = listaObjetos
+            .filter(obj => !prentId ? obj.parent === "" || !obj.parent : obj.parent === prentId)
+            .map(obj => {
+                const children = getTreeItemsFromData(obj.codigo);
+                const item = (
+                    <TreeItem
+                        key={obj.codigo + ''}
+                        nodeId={obj.codigo + ''}
+                        label={
+                            <div onClick={event => event.stopPropagation()}>
+                                <div><FolderIcon />
+                                    {obj.nome}
+                                    <button className="btn"
+                                        onClick={() => editarObjeto(obj.codigo)}
+                                        data-bs-toggle="modal" data-bs-target="#modalEdicao">
+                                        <BorderColorOutlinedIcon />
+                                    </button>
+                                    <button className="btn" title="Remover"
+                                        onClick={() => { remover(obj.codigo); }}>
+                                        <DeleteOutlineOutlinedIcon />
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                        children={children}
+                    >
+                    </TreeItem>
+                );
+                return item;
+            })
+
+        list.push(
+            (
+                <TreeItem
+                    key=""
+                    nodeId={"new_sub_" + (prentId ? prentId : '')}
+                    label={
+                        <div onClick={event => event.stopPropagation()}>
+                            <button type="button" className="btn"
+                                data-bs-toggle="modal" data-bs-target="#modalEdicao"
+                                onClick={() => novoObjeto(prentId)}>
+                                <CreateNewFolderOutlinedIcon />
+                            </button>
+                        </div>
+                    }
+                >
+                </TreeItem>
+            )
+        );
+
+        return list;
+    };
+
+    const getListFromData = (prentId) => {
+        return listaObjetos
+            .filter(obj => !prentId ? obj.parent === "" || !obj.parent : obj.parent === prentId)
+            .map(obj => { obj.children = getListFromData(obj.codigo); return obj; });
+    };
 
     const editarObjeto = async codigo => {
         try {
@@ -121,8 +174,8 @@ function Diretorio() {
     return (
         <DiretorioContext.Provider value={{
             alerta, setAlerta, listaObjetos, remover,
-            objeto, editar, acaoCadastrar, getListaObjetosSemSelf,
-            getDiretorioList, handleChange, novoObjeto, editarObjeto
+            objeto, editar, acaoCadastrar, getListaObjetosSemSelf, getListFromData,
+            getTreeItemsFromData, handleChange, novoObjeto, editarObjeto
         }}>
             <Carregando carregando={carregando}>
                 <Tabela />
